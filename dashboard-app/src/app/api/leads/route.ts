@@ -129,7 +129,7 @@ export async function POST(request: NextRequest) {
         ${body.stage || "Proposal"},
         ${body.stage_percentage || 0},
         ${saleDate},
-        ${nextActivityDate},
+           ${body.next_activity_date || null},  // FIX: undefined → null
         ${companyId},
         ${body.company_name || 'SuperCompany Ltd ASA'},
         ${body.owner || 'John Doe'},
