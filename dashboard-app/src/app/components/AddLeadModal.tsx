@@ -150,7 +150,9 @@ const AddLeadModal: React.FC<AddLeadModalProps> = ({
       await onSubmit({
         ...formData,
         company_id: company.id,
-        company_name: company.name
+        company_name: company.name,
+         owner: 'John Doe',   
+      currency: 'EUR'      
       })
       
       // Reset on success
