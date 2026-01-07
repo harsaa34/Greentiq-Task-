@@ -108,36 +108,36 @@ export async function POST(request: NextRequest) {
     // IMPORTANT: Handle null for next_activity_date
     const nextActivityDate = body.next_activity_date || null;
 
-    const result = await db`
-      INSERT INTO leads (
-        sale_name,
-        status,
-        amount,
-        stage,
-        stage_percentage,
-        sale_date,
-        next_activity_date,
-        company_id,
-        company_name,
-        owner,
-        currency,
-        created_at
-      ) VALUES (
-        ${body.sale_name},
-        ${body.status || "Open"},
-        ${body.amount},
-        ${body.stage || "Proposal"},
-        ${body.stage_percentage || 0},
-        ${saleDate},
-           ${body.next_activity_date || null},  // FIX: undefined → null
-        ${companyId},
-        ${body.company_name || 'SuperCompany Ltd ASA'},
-        ${body.owner || 'John Doe'},
-        ${body.currency || 'EUR'},
-        ${now.toISOString()}
-      )
-      RETURNING *
-    `;
+   const result = await db`
+  INSERT INTO leads (
+    sale_name,
+    status,
+    amount,
+    stage,
+    stage_percentage,
+    sale_date,
+    next_activity_date,
+    company_id,
+    company_name,
+    owner,
+    currency,
+    created_at
+  ) VALUES (
+    ${body.sale_name},
+    ${body.status || "Open"},
+    ${body.amount},
+    ${body.stage || "Proposal"},
+    ${body.stage_percentage || 0},
+    ${saleDate},
+    ${nextActivityDate},
+    ${companyId},
+    ${body.company_name || 'SuperCompany Ltd ASA'},
+    ${body.owner || 'John Doe'},
+    ${body.currency || 'EUR'},
+    ${now.toISOString()}
+  )
+  RETURNING *
+`;
 
     console.log("Insert successful, result:", result);
     console.log("Created lead ID:", result[0]?.id);
