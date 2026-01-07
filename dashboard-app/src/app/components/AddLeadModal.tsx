@@ -27,6 +27,8 @@ interface AddLeadModalProps {
   onSubmit: (lead: LeadFormData & {
     company_id: number
     company_name: string
+    owner: string
+    currency: string
   }) => void
   selectedCompany?: Company
 }
@@ -151,8 +153,8 @@ const AddLeadModal: React.FC<AddLeadModalProps> = ({
         ...formData,
         company_id: company.id,
         company_name: company.name,
-         owner: 'John Doe',   
-      currency: 'EUR'      
+        owner: 'John Doe',
+        currency: 'EUR'
       })
       
       // Reset on success
